@@ -1,0 +1,197 @@
+/*  Notes  *
+    #0f3f0f Dark Green
+    #c00 Red
+
+
+ */
+/*  Global Stuff  */
+
+    * {
+        margin: 0;
+        padding: 0;  }
+
+    html {
+        background-color: #333;
+        height: 100%;  }
+
+    body {
+        position: relative;
+        margin: 0;
+        min-height: 100%;  }
+
+    h1 {
+        text-align: center;
+    }
+
+/*  Header Stuff  */
+    nav {
+        width: 100%;
+        height:47px;
+        background-color: black;
+        position: absolute;  }
+
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: inherit; /* Make it stick, even on scroll */  }
+
+    nav li {
+        float: left;  }
+
+    nav li a {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;  }
+
+    nav a:hover {
+        color: white;
+        background-color: #c00;  }
+
+    .active-nav {
+        display: inline-block;
+        color: white;
+        background-color: darkred;
+        text-align: center;
+        padding: 14px 16px;  }
+
+/*  Body Stuff  */
+    main {
+        padding-top: 47px;
+        color: #c00;
+        padding-bottom:47px;  }
+
+    section {
+        display: flex;  }
+
+    .character-grid-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;/*Pic,Name,Race,Class*/
+        margin: 0 10px;
+        grid-column-gap: 8px;
+        grid-row-gap: 15px;
+        Color: white;
+        z-index: 1;  }
+
+    .character-grid-wrapper img {
+        max-height: 200px;
+        width: auto;  }
+
+    .about-grid-wrapper {
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+        font-size: 200%;
+        margin: 0 10px;
+        grid-column-gap: 1px;
+        grid-row-gap: 1px;
+        z-index: 1;  }
+
+    .about-grid-wrapper img {
+        max-width: 100%;
+        margin: 0 auto;  }
+
+    .about-grid-wrapper p {
+        padding: 10px 20px;
+        border-radius: 5px;
+        color: #ccc;  }
+
+    .about-grid-wrapper a {
+        text-decoration: none;
+        color: black;  }
+
+    .mainLogo {
+        margin: 0 15%;
+        padding: 0;
+        width: 70%;
+        transform: rotate(0);
+        z-index: -1;  }
+
+    .index-wrapper {
+        display: grid;
+        grid-template-columns: 2fr 4fr;
+        grid-column-gap: 15px; 
+        grid-row-gap: 15px;
+        margin: 10px 8%;
+        padding: 20px 0;
+        text-decoration: none;
+        text-align: center;
+        color: black;
+        background-color: #c00;
+        border-radius: 5px;  }
+
+    .index-wrapper:hover {
+        background-color: darkred;
+        color: white;  }
+
+    .index-wrapper h1 {
+        font-size: 200%;  }
+
+    .index-wrapper p {
+        text-align: left;
+        color: white;  }
+        
+/*  Contact Form  */
+    input[type=text], select, textarea {
+        width: 100%; /* Full width */
+        padding: 12px; /* Some padding */  
+        border: 1px solid #333; /* Gray border */
+        background-color: #ddd;
+        border-radius: 4px; /* Rounded borders */
+        box-sizing: border-box; /* Make sure that padding and width stays in place */
+        margin-top: 6px; /* Add a top margin */
+        margin-bottom: 16px; /* Bottom margin */
+        resize: vertical;  }
+
+    input[type=email], select, textarea {
+        width: 100%; /* Full width */
+        padding: 12px; /* Some padding */  
+        border: 1px solid #333; /* Gray border */
+        background-color: #ddd;
+        border-radius: 4px; /* Rounded borders */
+        box-sizing: border-box; /* Make sure that padding and width stays in place */
+        margin-top: 6px; /* Add a top margin */
+        margin-bottom: 16px; /* Bottom margin */
+        resize: vertical;  }
+
+    input[type=submit] {
+        background-color: #c00;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;  }
+
+    input[type=submit]:hover {
+        background-color: darkred;  }
+
+    .create-container {
+        max-width: 70%;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 0 15%;  }
+
+/*  Footer Stuff  */
+    footer {
+        text-align: center;
+        position: absolute;
+        margin-top: -47px;
+        height: 47px;
+        width: 100%;
+        bottom: 0;  }
+
+    footer hr {
+        margin: 0;
+        margin-bottom: 5px;
+        height: 2px;
+        border-width: 0;
+        background-color: darkgray;  }
+
+    footer a {
+        text-decoration: none;
+        color: white;  }
+
+    footer a:hover {
+        color: #333;  }
