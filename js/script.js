@@ -1,9 +1,9 @@
 $(document).ready(function() {
 });
 
-new Vue({
+// new Vue({
 
-})
+// })
 
 $(".nextPage").click(function(e) {
 	e.preventDefault();
@@ -13,7 +13,7 @@ $(".nextPage").click(function(e) {
         url : myUrl,
         dataType : "json",
         success : function(json) {
-            console.log(json);
+            console.log(json.count);
         }
     });
 });
