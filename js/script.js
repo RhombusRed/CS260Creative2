@@ -1,79 +1,95 @@
 $(document).ready(function() {
 });
 
-// new Vue({
+new Vue({
+    el: '#GhibliOutput',
+    data: {
+        sTitle: "",
+        sID: "",
+    }
+})
 
-// })
+// function setHeader(xhr) {
+//     var token = '';
+//     xhr.setRequestHeader('Authorization', token);
+//   }
 
-$(".nextPage").click(function(e) {
-	e.preventDefault();
-	var value = "classes";
-    var myUrl= "http://dnd5eapi.co/api/" + value;
-    $.ajax({
-        url : myUrl,
-        dataType : "json",
-        success : function(json) {
-            console.log(json.count);
-        }
-    });
+var seen = false;
+
+$("input").click(function(e) {
+    e.preventDefault();
+    goBack();
+    // var results = "";
+    // var myUrl= 'https://ghibliapi.herokuapp.com/films';
+    // $.ajax({
+    //     url: myUrl,
+    //     dataType: 'JSONP',
+    //     jsonpCallback: 'callback',
+    //     type: 'GET',
+    //     success: function (data) {
+    //         console.log(data);
+    //         seen = true;
+    //         results += "<h1>Pick a movie to know more about!</h1><div class =\"FilmList\"> "
+    //         for (var i = 0; i < data.length; i ++) {
+    //             results += "<input class=\"filmTitle\" type=\"submit\" ghibliCode=\"" + data[i].id + "\" value=\"" + data[i].title + "\"></input>"
+    //         }
+    //         results += "</div><script>$(\".filmTitle\").click(function(e) {e.preventDefault();console.log(findGhibliCode(e.target.value));});</script>"
+    //         $("#GhibliOutput").html(results);
+    //     }
+    // });
 });
 
-$("#weatherSubmit").click(function(e) {
-	e.preventDefault();
-	var value = $("#weatherInput").val();
-    var myKey = "7522407228e1e3f008c7227998e8e738";
-    var myurl= "http://api.openweathermap.org/data/2.5/weather?q=" + value + ",US&units=imperial" + "&APPID=" + myKey + "";
+function findGhibliCode (sTitle) {
+    var results = "<h1>"+ sTitle +"</h1>";
+    results += "<input class=\"back mainInput\" type=\"submit\" value=\"Go Back\""
+    var myUrl= 'https://ghibliapi.herokuapp.com/films';
     $.ajax({
-        url : myurl,
-        dataType : "json",
-        success : function(json) {
-            console.log(json.main);
-            var results = "";
-            results += "<h3>Weather in " + json.name + "</h3>";
-            for (var i=0; i<json.weather.length; i++) {
-                results += '<img src="http://openweathermap.org/img/w/' + json.weather[i].icon + '.png"/>';
+        url: myUrl,
+        dataType: 'JSONP',
+        jsonpCallback: 'callback',
+        type: 'GET',
+        success: function (data) {
+            var index = 0;
+            for (var i = 0; i < data.length; i ++) {
+                console.log(i);
+                if(data[i].title == sTitle) {
+                    index = i;
+                    i = data.length;
+                };
             }
-            results += "<div class=\"asideBox\"><h2>" + json.main.temp + " &deg;F</h2>"
-            results += "<p>"
-            for (var i=0; i<json.weather.length; i++) {
-                results += json.weather[i].description
-                if (i !== json.weather.length - 1)
-                results += ", "
-            }
-            results += "</p></div>"
-            results += "<div class=\"asideBox\"><p> High " + json.main.temp_max + "</p>"
-            results+= "<p>Low " + json.main.temp_min + "</div>"
-            results += "<p class=\"quickQuip\">"
-            if(json.main.temp > 100) {results += "Wow! That's really hot!"}
-            else if(json.main.temp > 70) {results += "Looks like beach weather to me!"}
-            else if(json.main.temp > 50) {results += "Not too hot, not too cold. Must be a nice day."}
-            else if(json.main.temp > 30) {results += "Its pretty chilly outside. Take a jacket."}
-            else if(json.main.temp > 0) {results += "It\'s a cold one out there. Make some hot cocoa!"}
-            else if(json.main.temp <= 0) {results += "Do you really need to go outside? It's way too cold..."}
-            results += "</p>";
-            if (results == "") {results = "<p>Sorry, it looks like that city wasn't found. Please check the spelling and try again.</p>"}
-            $("#weatherResults").html(results);
+            results += "<div class=\"Film\">"
+            results += "<div class=\"Intro\"><p>Release Date: " + data[index].release_date + "</p>";
+            results += "<p>Directed by: " + data[index].director + "</p></div>";
+            results += "<p>" + data[index].description + "</p>";
+            results += "</div>"
+            results += "<script>$(\".back\").click(function(e) {e.preventDefault();goBack();});</script>"
+            $("#GhibliOutput").html(results);
         }
-        
     });
-});
+}
 
-$("#stackSubmit").click(function(e) {
-	e.preventDefault();
-	var value = $("#stackInput").val();
-    var myurl= "https://api.stackexchange.com/2.2/search?order=desc&sort=activity&site=stackoverflow&intitle=" + value;
+function goBack () {
+    var results = "";
+    var myUrl= 'https://ghibliapi.herokuapp.com/films';
     $.ajax({
-        url : myurl,
-        dataType : "json",
-        success : function(json) {
-            var results = "";
-            results += "<h2>Searching for \"" + value + "\"</h2>"
-            for(var i = 0; i < 10; i ++) {
-                results += "<a href=\"" + json.items[i].link + "\" target=\"_blank\">" + json.items[i].title + "</a><br><br>"
+        url: myUrl,
+        dataType: 'JSONP',
+        jsonpCallback: 'callback',
+        type: 'GET',
+        success: function (data) {
+            console.log(data);
+            seen = true;
+            results += "<h1>Pick a movie to know more about!</h1><div class =\"FilmList\"> "
+            for (var i = 0; i < data.length; i ++) {
+                results += "<input class=\"filmTitle\" type=\"submit\" ghibliCode=\"" + data[i].id + "\" value=\"" + data[i].title + "\"></input>"
             }
-            
-            $("#stackResults").html(results);
+            results += "</div><script>$(\".filmTitle\").click(function(e) {e.preventDefault();console.log(findGhibliCode(e.target.value));});</script>"
+            $("#GhibliOutput").html(results);
         }
-        
     });
+};
+
+$(".filmTitle").click(function(e) {
+    e.preventDefault();
+    console.log("It worked");
 });
